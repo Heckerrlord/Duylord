@@ -1,0 +1,120 @@
+@charset "UTF-8";
+
+section {
+	padding-top: 90px;
+	padding-bottom: 20px;
+}
+
+.card {
+	height: 300px;
+}
+
+.title {
+	height: 73px;
+}
+
+.card-price {
+	font-size: medium;
+}
+
+.caption .nav-link {
+	color: #fff;
+}
+
+.caption {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background-color: rgba(0, 0, 0, 0.5);
+	color: #fff;
+	width: 100%;
+	padding: 10px;
+	text-align: center;
+	opacity: 0;
+	transition: opacity 0.5s;
+}
+
+.nProduct {
+	margin-bottom: 30px;
+	margin-top: 20px;
+}
+
+.image-container {
+	position: relative;
+	display: inline-block;
+}
+
+.card-img-top {
+	width: 304px;
+	height: 171px;
+}
+
+.image-container:hover .caption {
+	opacity: 1;
+}
+
+.share {
+	margin-left: 12px;
+}
+
+.nTab {
+	margin-top: 10px;
+	border-bottom: 1px solid #6666;
+	margin-bottom: 15px;
+}
+
+.nTab h3 {
+	font-weight: 1000px;
+	color: rgba(26, 25, 25, 0.533);
+}
+
+.slideshow {
+	margin-top: -15px;
+}
+
+.contactdetail .nav-link {
+	border-radius: 2px;
+	margin-top: 10px;
+}
+
+.contactdetail .nav-link:hover {
+	background-color: #abd07e;
+	color: #fff;
+}
+
+
+.hate i {
+	font-size: 20px;
+	color: #000;
+}
+
+
+.share i {
+	font-size: 20px;
+	color: #666;
+}
+
+.contactdetail ul a i {
+	font-size: 20px;
+	color: #666;
+}
+
+.share {
+	margin-left: 12px;
+}
+
+.detailP {
+	margin-bottom: 20px;
+}
+
+.nTab {
+	margin-top: 10px;
+	border-bottom: 1px solid #6666;
+	margin-bottom: 15px;
+}
+
+.nTab h3 {
+	font-weight: 1000px;
+	color: rgba(26, 25, 25, 0.533);
+}

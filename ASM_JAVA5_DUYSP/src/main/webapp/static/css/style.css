@@ -1,0 +1,173 @@
+.card {
+	height: 300px;
+}
+
+.title {
+	height: 73px;
+}
+
+.card-price {
+	font-size: medium;
+}
+
+.caption .nav-link {
+	color: #fff;
+}
+
+.item-info {
+	display: -webkit-box;
+	-webkit-line-clamp: 1;
+	/* Số dòng tối đa muốn hiển thị */
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.caption {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background-color: rgba(0, 0, 0, 0.5);
+	color: #fff;
+	width: 100%;
+	padding: 10px;
+	text-align: center;
+	opacity: 0;
+	transition: opacity 0.5s;
+}
+
+.nProduct {
+	margin-bottom: 30px;
+	margin-top: 20px;
+}
+
+.image-container {
+	position: relative;
+	display: inline-block;
+}
+
+.card-img-top {
+	width: 304px;
+	height: 171px;
+}
+
+.image-container:hover .caption {
+	opacity: 1;
+}
+
+.card-price {
+	color: #85c94f;
+	font-weight: 600;
+}
+
+--DETAIL .detailcontent {
+	border: 1.5px solid #f2f2f2;
+	width: 100%;
+	height: 100%;
+	padding: 20px;
+}
+
+.contactdetail .nav-link {
+	border-radius: 2px;
+	margin-top: 10px;
+}
+
+.contactdetail .nav-link:hover {
+	background-color: #abd07e;
+	color: #fff;
+}
+
+.breadcrumb {
+	background-color: #f2f2f2;
+	padding: 10px;
+	border-radius: 5px;
+}
+
+.breadcrumb ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	display: flex;
+	align-items: center;
+}
+
+.breadcrumb li {
+	margin-right: 10px;
+	font-size: 0.8rem;
+}
+
+.breadcrumb li:last-child {
+	margin-right: 0;
+}
+
+.breadcrumb a {
+	text-decoration: none;
+	color: #333;
+}
+
+.breadcrumb a:hover {
+	text-decoration: underline;
+}
+
+#fter {
+	background-color: #333;
+	color: aliceblue;
+	padding: 20px;
+	margin-top: 20px;
+	text-align: center;
+}
+
+.nTab {
+	border-bottom: 1px solid #6666;
+	margin-bottom: 15px;
+}
+
+.nTab .nav-link {
+	font-weight: 600;
+	font-size: 18px;
+}
+
+.nTab a {
+	border-left: 1px solid #e2e2e2;
+}
+
+/* QUANGCAO */
+.quangCao {
+	padding: 30px;
+	color: white;
+	font-weight: 200;
+}
+
+.quangCao strong {
+	color: white;
+	font-size: 40px;
+}
+
+.quangCao h1 {
+	font-size: 30px;
+}
+
+.qc1 {
+	background-color: #abd07e;
+	text-align: center;
+	padding: 30px;
+}
+
+.qc2 {
+	background-color: #ff8787;
+	text-align: center;
+	padding: 30px;
+}
+
+.qc3 {
+	background-color: #70c6ed;
+	text-align: center;
+	padding: 30px;
+}
+
+/* QUANGCAO */
+
+.pageSwitch {
+	margin-top: 10px;
+}
