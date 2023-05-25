@@ -14,8 +14,8 @@
 	<div class="container">
 		<div class="login">
 			<h2>WELLCOME</h2>
-			<form:form  modelAttribute="user"
-			action="${pageContext.request.contextPath}" method="POST">
+			<form:form modelAttribute="user"
+				action="${pageContext.request.contextPath}" method="POST">
 				<div class="form-group">
 					<label for="username">USERNAME:</label>
 					<form:input type="text" class="form-control" id="username"
@@ -26,9 +26,10 @@
 					<label for="password">PASSWORD:</label>
 					<form:password path="password" class="form-control" id="password"
 						placeholder="Enter your password" />
-					<%-- <form:password style="margin-top: 5px" name="password"
+					 <input type="password" style="margin-top: 5px" name="password2"
 						class="form-control"
-						placeholder="Confirm your password" /> --%>
+						placeholder="Confirm your password" /> 
+					<div class="text-success">${mess}</div>
 				</div>
 
 				<button type="submit" class="btn btn-primary">Sign up</button>

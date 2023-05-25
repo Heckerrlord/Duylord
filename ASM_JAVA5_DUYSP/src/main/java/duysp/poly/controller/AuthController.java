@@ -5,6 +5,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -26,7 +27,7 @@ import jakarta.validation.Valid;
 
 @Controller
 public class AuthController {
-	
+
 	@Autowired
 	HttpSession session;
 	@Autowired
@@ -39,8 +40,6 @@ public class AuthController {
 		return "/login";
 	}
 
-	
-
 	@GetMapping({ "*/logout", "/logout" })
 	public String logout(Model m) {
 		session.removeAttribute(SessionLG.CURRENT_USER);
@@ -50,9 +49,8 @@ public class AuthController {
 	@PostMapping("/login")
 	public String checkLoginForm(Model m, @Validated @ModelAttribute("user") Users user, BindingResult result) {
 
-
-		if(result.hasErrors()) {
-System.out.println(user.getUsername()+"Duy nè ae");
+		if (result.hasErrors()) {
+			System.out.println(user.getUsername() + "Duy nè ae");
 			return "/login";
 		}
 		// login sucess
@@ -73,15 +71,33 @@ System.out.println(user.getUsername()+"Duy nè ae");
 		m.addAttribute("user", new Users());
 		return "/signup";
 	}
+
 	@PostMapping("/signup")
-	public String createAccount(Model m,@ModelAttribute("user") Users user) {
+	public String createAccount(Model m, @ModelAttribute("user") Users user,@RequestParam String password2) {
 		// validate
-		
-		user.setRole(false);
-		user.setStatus(0);
-		userRepository.save(user);
-		m.addAttribute("mes", "OK");
-		return "redirect:login";
+		try {
+			Optional<Users> optionalUser = userRepository.findById(user.getUsername());
+			Users u = optionalUser.orElse(null);
+			if (u != null) {
+				System.out.println("User đã tồn tại");
+				m.addAttribute("mess", "Username already exists, please try again");
+				return "/signup";
+			} else {
+				if(user.getPassword().equals(password2)) {
+				user.setRole(false);
+				user.setStatus(0);
+				userRepository.save(user);
+				System.out.println("Thành công");
+				m.addAttribute("mess", "Sign Up Success");
+				}else {
+					System.out.println("Fail");
+					m.addAttribute("mess", "Password 1 and 2 are not the same");
+				}
+				return "/signup";
+			}
+		} catch (Exception e) {
+			return "/signup";
+		}
 	}
 
 	@GetMapping(value = { "/account*", "account/update" })
@@ -99,7 +115,7 @@ System.out.println(user.getUsername()+"Duy nè ae");
 			@RequestParam("file") MultipartFile file) {
 		try {
 			user.setStatus(0);
-				
+
 			if (!file.isEmpty()) {
 				byte[] bytes = file.getBytes();
 				Path path = Paths.get(pathFolder + file.getOriginalFilename());
@@ -108,7 +124,7 @@ System.out.println(user.getUsername()+"Duy nè ae");
 			} else {
 				user.setPhoto(user.getPhoto());
 			}
-			
+
 			userRepository.save(user);
 			session.setAttribute(SessionLG.CURRENT_USER, user);
 			session.setAttribute("CURRENT_USER", user);

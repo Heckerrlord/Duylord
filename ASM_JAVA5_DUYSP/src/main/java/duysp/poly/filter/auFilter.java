@@ -14,10 +14,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-
-@WebFilter("/admin/*")
-public class adminFilter implements Filter{
-
+@WebFilter("/account/*")
+public class auFilter implements Filter{
 	@Override
 	public void doFilter(ServletRequest arg0, ServletResponse arg1, FilterChain arg2)
 			throws IOException, ServletException {
@@ -28,13 +26,9 @@ public class adminFilter implements Filter{
         if (admin == null) {
             session.setAttribute("mes", "Vui lòng đăng nhập");
             res.sendRedirect("http://localhost:8080/login");
-        }else  if (admin.getRole() == false) {
-            session.setAttribute("mes", "Vui lòng đăng nhập với tài khoản admin");
-            res.sendRedirect("http://localhost:8080/login");
-        } else {
+        }else {
         	arg2.doFilter(req, res);
         }
 		
 	}
-
 }

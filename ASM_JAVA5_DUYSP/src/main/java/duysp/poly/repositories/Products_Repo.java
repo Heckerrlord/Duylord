@@ -12,7 +12,8 @@ import duysp.poly.model.Users;
 
 public interface Products_Repo extends CrudRepository<Products, String>{
 	Page<Products> findAll(Pageable pageable);
-	
+	@Query("SELECT u FROM Products u where u.Available = :stt")
+	Page<Products> fillByStatus(Pageable pageable,boolean stt);
 	@Query("SELECT u FROM Products u where u.Available = :stt")
 	public List<Products> listByStatus(boolean stt);
 	@Query("SELECT u FROM Products u where u.id =:id")

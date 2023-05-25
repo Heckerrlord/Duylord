@@ -13,6 +13,9 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -43,30 +46,31 @@ public class Products_adminController {
 	@Value("${upload.path}")
 	private String pathFolder;
 
-	@GetMapping({ "/admin/product", "/admin/product/create" })
-	public String goCRUDProducts(Model m) {
-		currentPages(m);
-		m.addAttribute("products", new Products());
-		m.addAttribute("pageCurrent2", "crudProducts.jsp");
-		return "indexAdmin";
-	}
+//	@GetMapping({ "/admin/product", "/admin/product/create" })
+//	public String goCRUDProducts(Model m) {
+//		currentPages(m);
+//		m.addAttribute("products", new Products());
+//		m.addAttribute("pageCurrent2", "crudProducts.jsp");
+//		return "indexAdmin";
+//	}
 
 	@PostMapping("/admin/product")
-	public String postCRUDProducts(Model m) {
+	public String postCRUDProducts(Model m,
+			@RequestParam(name = "tabNum", required = false, defaultValue = "1") Integer pageNum,
+			@RequestParam(name = "tabSize", required = false, defaultValue = "3") Integer pageSize) {
 		currentPages(m);
-		m.addAttribute("products", new Products());
+		productPage(m, pageNum, pageSize);
 		m.addAttribute("pageCurrent2", "crudProducts.jsp");
 		return "indexAdmin";
 	}
 
 	public void currentPages(Model m) {
-		List<Products> list = productRepository.listByStatus(true);
 		List<Products> list2 = productRepository.listByStatus(false);
 		List<Brands> listB = (List<Brands>) brandsRepository.findAll();
 		m.addAttribute("brandsName", listB);
-		m.addAttribute("list", list);
-		m.addAttribute("pageCurrent2", "crudProducts.jsp");
+//		m.addAttribute("list", list);
 		m.addAttribute("list2", list2);
+		m.addAttribute("pageCurrent2", "crudProducts.jsp");
 
 	}
 
@@ -90,7 +94,7 @@ public class Products_adminController {
 				} else {
 					product.setImage(product.getImage());
 				}
-				System.out.println(product.getImage() + "hahahhahah");
+				m.addAttribute("mesProduct", "Tạo sản phẩm mới thành công");
 				product.setBrands(brands);
 				product.setCreateDate(currentDate);
 				m.addAttribute("products", new Products());
@@ -106,9 +110,10 @@ public class Products_adminController {
 	}
 
 	@PostMapping("/admin/product/update")
-	public String updateProduct(Model m, @RequestParam("id") Products product,
-			@RequestParam("thuonghieu") Brands brands, @RequestParam("file") MultipartFile file) {
+	public String updateProduct(Model m, @ModelAttribute Products product, @RequestParam("thuonghieu") Brands brands,
+			@RequestParam("file") MultipartFile file) {
 		try {
+			product.setId(Long.parseLong(request.getParameter("idPro")));
 			LocalDate localDate = LocalDate.now();
 			Date currentDate = Date.valueOf(localDate);
 			if (!file.isEmpty()) {
@@ -119,6 +124,7 @@ public class Products_adminController {
 			} else {
 				product.setImage(product.getImage());
 			}
+			System.out.println(product.getName());
 			product.setBrands(brands);
 			product.setCreateDate(currentDate);
 			m.addAttribute("products", new Products());
@@ -149,10 +155,26 @@ public class Products_adminController {
 	}
 
 	@GetMapping("/admin/product/edit*")
-	public String edit(Model m, @RequestParam("id") Products product) {
-		m.addAttribute("products", product);
+	public String edit(Model m, @RequestParam("id") Products product,
+			@RequestParam(name = "tabNum", required = false, defaultValue = "1") Integer pageNum,
+			@RequestParam(name = "tabSize", required = false, defaultValue = "3") Integer pageSize) {
 		currentPages(m);
+		productPage(m, pageNum, pageSize);
+		m.addAttribute("products", product);
+		return "indexAdmin";
+	}
 
+	@GetMapping({ "/admin/product", "/admin/product/create" })
+	public String productPage(Model model,
+			@RequestParam(name = "tabNum", required = false, defaultValue = "1") Integer pageNum,
+			@RequestParam(name = "tabSize", required = false, defaultValue = "3") Integer pageSize) {
+		currentPages(model);
+		Pageable pageable = PageRequest.of(pageNum - 1, pageSize);
+		Page<Products> page = productRepository.fillByStatus(pageable, true);
+		model.addAttribute("totalTab", page.getTotalPages());
+		model.addAttribute("list", page.getContent());
+		model.addAttribute("products", new Products());
+		model.addAttribute("pageCurrent2", "crudProducts.jsp");
 		return "indexAdmin";
 	}
 

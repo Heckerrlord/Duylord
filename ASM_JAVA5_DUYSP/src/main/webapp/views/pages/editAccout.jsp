@@ -67,7 +67,7 @@
 						</div>
 						<div class="col-6">
 							<div class="align-items-center" style="text-align: center">
-								<img class=anh src="../../static/images/${users.photo}">
+								<img class=anh id="anh" src="../../static/images/${users.photo}">
 									<form:input path="photo" class="form-control-plaintext mx-auto"
 										style="width:30%;text-align: center;" />
 							</div>
@@ -83,3 +83,10 @@
 		</div>
 	</div>
 </div>
+ <script>
+      const image = document.getElementById("anh"),
+        input = document.getElementById("file");
+      input.addEventListener("change", () => {
+        image.src = URL.createObjectURL(input.files[0]);
+      });
+    </script>

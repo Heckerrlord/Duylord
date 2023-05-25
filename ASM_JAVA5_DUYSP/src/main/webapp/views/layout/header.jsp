@@ -52,7 +52,7 @@
 						<li class="nav-item"><a class="nav-link nav-link-1"
 							style="font-weight: bold; color: #fff;" data-toggle="modal"
 							data-target="#changePassModal" aria-current="page"
-							href="${url}account?id=${sessionScope.currentUser.username}">Welcome ${sessionScope.currentUser.fullname}</a>
+							href="${url}account?id=${sessionScope.currentUser.username}">Welcome ${sessionScope.currentUser.username}</a>
 						</li>
 						<c:if test="${sessionScope.currentUser.role == true}">
 

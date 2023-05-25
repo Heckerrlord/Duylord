@@ -36,7 +36,7 @@ public class HomeController {
 			@RequestParam(name = "pageSize", required = false, defaultValue = "4") Integer pageSize) {
 
 		Pageable pageable = PageRequest.of(pageNum - 1, pageSize);
-		Page<Products> page = productRepository.findAll(pageable);
+		Page<Products> page = productRepository.fillByStatus(pageable, true);
 		model.addAttribute("totalPage", page.getTotalPages());
 		model.addAttribute("products", page.getContent());
 		model.addAttribute("pageCurrent", "pages/home.jsp");

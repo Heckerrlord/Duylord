@@ -15,11 +15,7 @@ import duysp.poly.repositories.Products_Repo;
 import duysp.poly.repositories.Users_Repo;
 @Controller
 public class AdminController {
-	@Autowired
-	private Users_Repo userRepository;
 	
-	@Autowired
-	private Products_Repo productRepository;
 	
 	
 	@GetMapping("/admin/home")

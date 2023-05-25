@@ -42,15 +42,15 @@ label {
 					<div class="col-1">
 						<div class="form-group">
 							<label for="name">Mã:</label> <input type="text"
-								class="form-control" value="${products.id}" readonly="true"
-								style="background: #C9D4CE" id="id" />
+								class="form-control" value="${products.id}" name="idPro"
+								readonly="true" style="background: #C9D4CE" />
 						</div>
 					</div>
 					<div class="col-6">
 						<div class="form-group">
 							<label for="name">Tên sản phẩm:</label>
 							<form:input class="form-control" path="name" id="name" />
-							<form:errors class="text-danger" path="name" id="name" />
+
 						</div>
 					</div>
 					<div class="col-3">
@@ -117,6 +117,8 @@ label {
 						</c:forEach>
 					</select>
 				</div>
+				
+				
 				<button type="submit"
 					formaction="${pageContext.request.contextPath}/admin/product/create"
 					class="btn btn-primary">Add</button>
@@ -129,7 +131,7 @@ label {
 			</form:form>
 		</div>
 	</div>
-
+<div class="text-success">${mesProduct}</div>
 	<h2>Products Available</h2>
 	<table class="table">
 		<thead>
@@ -164,10 +166,16 @@ label {
 					</td>
 				</tr>
 			</c:forEach>
+
 			<!-- Add more rows dynamically using JavaScript -->
 		</tbody>
 	</table>
-
+	<ul class="pagination justify-content-end">
+	<c:forEach begin="1" end="${totalTab}" varStatus="status">
+		<li class="page-item"><a
+			href="${pageContext.request.contextPath}/admin/product?tabNum=${status.index}"
+			class="page-link">${status.index}</a></li>
+	</c:forEach></ul>
 	<h2>Products Not Available</h2>
 	<table class="table">
 		<thead>
@@ -206,3 +214,10 @@ label {
 		</tbody>
 	</table>
 </div>
+<script>
+      const image = document.getElementById("anh"),
+        input = document.getElementById("file");
+      input.addEventListener("change", () => {
+        image.src = URL.createObjectURL(input.files[0]);
+      });
+    </script>

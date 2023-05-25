@@ -24,7 +24,6 @@ public class Products {
 	
 
 	@Column(name="PRODUCTNAME")
-	@NotBlank(message = "Khong de trong ten")
 	private String Name;
 	
 	@Column(name="IMAGE")

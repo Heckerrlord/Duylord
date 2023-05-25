@@ -28,8 +28,8 @@
 				<div class="col-lg-3">
 					<div class="card">
 						<div class="image-container">
-							<img src="../../static/images/${item.image}" class="card-img-top" style="  height: 171px;
-        width: 304px; object-fit: cover;" />
+							<img src="../../static/images/${item.image}" class="card-img-top"
+								style="height: 171px; width: 304px; object-fit: cover;" />
 							<div class="caption">
 								<a class="nav-link"
 									href="${pageContext.request.contextPath}/detail?id=${item.id}">Chi
@@ -54,20 +54,20 @@
 			<div class="pageSwitch">
 				<nav aria-label="Page navigation example">
 					<c:set var="pageNum" value="${param.pageNum}" />
+					<c:set var="pageMax" value="${totalPage}" />
 					<c:set var="nextPage" value="${pageNum != null ? pageNum + 1 : 2}" />
 					<c:set var="prePage" value="${pageNum != null ? pageNum - 1 : 1}" />
 					<ul class="pagination justify-content-end">
 						<li class="page-item"><a class="page-link"
 							href="<c:url value='${pageContext.request.contextPath}/index'>
-    <c:choose>
-        <c:when test="${pageNum != null}">
-        <c:if test="${pageNum > 1}"><c:param name='pageNum' value='${prePage}'/> </c:if>
-        </c:when>
-        <c:otherwise>
-            <c:param name='pageNum' value='1'/>
-        </c:otherwise>
-    </c:choose>
-</c:url>"
+  		<c:choose>
+        		<c:when test="${pageNum != null}">
+       				 <c:if test="${pageNum > 1}"><c:param name='pageNum' value='${prePage}'/> </c:if>
+        		</c:when>
+      		  <c:otherwise>
+          		  <c:param name='pageNum' value='1'/>
+        	  </c:otherwise>
+   		</c:choose></c:url>"
 							tabindex="-1" aria-disabled="true">Previous</a></li>
 
 
@@ -79,8 +79,11 @@
 
 						<li class="page-item"><a class="page-link"
 							href="<c:url value='${pageContext.request.contextPath}/index'>
+							
     <c:choose>
+    
         <c:when test="${pageNum != null}">
+     
             <c:param name='pageNum' value='${nextPage}'/>
         </c:when>
         <c:otherwise>
